@@ -1,0 +1,11 @@
+# C# Project
+# ----------
+/[Bb]in
+/obj
+/[Dd]ebug
+/[Rr]elease
+/*.user
+/*.aps
+/*.eto
+taglib-sharp.dll
+taglib-sharp.pdb

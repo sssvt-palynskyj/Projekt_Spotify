@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongsAndVotesMain", "SongsAndVotesMain\SongsAndVotesMain.csproj", "{A9843D82-8DE6-4EA2-A8A0-E6EA539F9728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongsAndVotesCommon", "SongsAndVotesCommon\SongsAndVotesCommon.csproj", "{1F66059F-488D-4570-BB4B-D1D2A46ACA6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "taglib-sharp", "taglib-sharp\taglib-sharp.csproj", "{6B143A39-C7B2-4743-9917-92262C60E9A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{2D7E71A6-9B58-4740-859C-440E0979BD22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{94E8E73D-5776-4F1E-A3D2-79568D061834}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Database\Secret.txt = Resources\Database\Secret.txt
+		Resources\Database\Song.csv = Resources\Database\Song.csv
+		Resources\Database\User.csv = Resources\Database\User.csv
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Songs", "Songs", "{24627905-103A-4178-BD43-E143D8259943}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Songs\Checkie_Brown_-_07_-_Freeze_CB_31.mp3 = Resources\Songs\Checkie_Brown_-_07_-_Freeze_CB_31.mp3
+		Resources\Songs\Playlist.txt = Resources\Songs\Playlist.txt
+		Resources\Songs\Yshwa_-_05_-_I_will.mp3 = Resources\Songs\Yshwa_-_05_-_I_will.mp3
+		Resources\Songs\Yshwa_-_06_-_Gas_Light.mp3 = Resources\Songs\Yshwa_-_06_-_Gas_Light.mp3
+		Resources\Songs\Yshwa_-_07_-_Battle_Rappers.mp3 = Resources\Songs\Yshwa_-_07_-_Battle_Rappers.mp3
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9843D82-8DE6-4EA2-A8A0-E6EA539F9728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9843D82-8DE6-4EA2-A8A0-E6EA539F9728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9843D82-8DE6-4EA2-A8A0-E6EA539F9728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9843D82-8DE6-4EA2-A8A0-E6EA539F9728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F66059F-488D-4570-BB4B-D1D2A46ACA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F66059F-488D-4570-BB4B-D1D2A46ACA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F66059F-488D-4570-BB4B-D1D2A46ACA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F66059F-488D-4570-BB4B-D1D2A46ACA6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{94E8E73D-5776-4F1E-A3D2-79568D061834} = {2D7E71A6-9B58-4740-859C-440E0979BD22}
+		{24627905-103A-4178-BD43-E143D8259943} = {2D7E71A6-9B58-4740-859C-440E0979BD22}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FE57994-924E-4283-AD9D-BFEC8A47274D}
+	EndGlobalSection
+EndGlobal
