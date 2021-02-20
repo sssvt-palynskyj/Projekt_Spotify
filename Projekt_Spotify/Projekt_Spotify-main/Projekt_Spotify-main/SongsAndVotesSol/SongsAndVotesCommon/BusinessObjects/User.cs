@@ -22,7 +22,11 @@ namespace SongsAndVotesCommon.BusinessObjects
         /// <summary>The user's password.</summary>
         public string Password { internal get; set; }
 
-
+        public User(string username, string password)
+        {
+            this.Username = username;
+            this.Password = password;
+        }
 
         public override string ToString()
         {

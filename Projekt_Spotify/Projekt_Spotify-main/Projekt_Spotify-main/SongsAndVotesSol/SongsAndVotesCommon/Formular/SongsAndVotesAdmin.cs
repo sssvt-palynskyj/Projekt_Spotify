@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SongsAndVotesCommon.Formular
 {
-    public partial class Form1 : Form
+    public partial class SongsAndVotesAdmin : Form
     {
-        public Form1()
+        public SongsAndVotesAdmin()
         {
             InitializeComponent();
 

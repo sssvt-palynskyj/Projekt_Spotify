@@ -23,6 +23,7 @@ namespace SongsAndVotesCommon.Interfaces
         /// </summary>
         /// <returns>Returns the list of all users.</returns>
         IList<User> GetList();
+        //done
 
 
 
@@ -32,7 +33,7 @@ namespace SongsAndVotesCommon.Interfaces
         /// <param name="user">Criteria that the found users should match.</param>
         /// <returns>Returns a list of matching users.</returns>
         IList<User> FindList(User user);
-
+        //done
 
 
         /// <summary>
@@ -41,6 +42,7 @@ namespace SongsAndVotesCommon.Interfaces
         /// <param name="user">User to check the repo for.</param>
         /// <returns>Returns true :-: the user exists, false :-: the user does not exist.</returns>
         bool Exists(User user);
+        //done
 
 
 
@@ -50,7 +52,7 @@ namespace SongsAndVotesCommon.Interfaces
         /// <param name="user">Information identifying the user to be loaded (their username).</param>
         /// <returns>Returns the requested user. If no such user exists, the method should throw an exception.</returns>
         User Load(User user);
-
+        //done
 
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿namespace SongsAndVotesCommon.Formular
 {
-    partial class Form1
+    partial class SongsAndVotesAdmin
     {
         /// <summary>
         /// Required designer variable.

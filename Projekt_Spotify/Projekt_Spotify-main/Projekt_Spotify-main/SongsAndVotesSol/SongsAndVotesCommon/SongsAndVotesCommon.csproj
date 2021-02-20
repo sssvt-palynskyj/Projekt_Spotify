@@ -51,11 +51,11 @@
     <Compile Include="Cryptography\CodeShifting.cs" />
     <Compile Include="Factories\CryptoFactory.cs" />
     <Compile Include="Factories\UserRepoFactory.cs" />
-    <Compile Include="Formular\Form1.cs">
+    <Compile Include="Formular\SongsAndVotesAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formular\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Formular\SongsAndVotesAdmin.Designer.cs">
+      <DependentUpon>SongsAndVotesAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ICrypto.cs" />
     <Compile Include="Interfaces\IUserRepo.cs" />
@@ -79,8 +79,8 @@
     <Folder Include="Cryptography\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formular\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Formular\SongsAndVotesAdmin.resx">
+      <DependentUpon>SongsAndVotesAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
