@@ -197,7 +197,33 @@ namespace SongsAndVotesCommon.Services
 
         public void Store(User user)
         {
-            
+            using(StreamWriter sw = new StreamWriter(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            using(StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            using(StreamReader sr2 = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            {
+                int i = 0;
+                List<User> usercsv = new List<User>();
+                User usr = new User(null, null);
+                string line;
+                string[] splitLine;
+
+                while (!sr.EndOfStream)
+                {
+                    line = sr.ReadLine();
+                    splitLine = line.Split(';');
+                    usr.Username = splitLine[0];
+                    usr.Password = splitLine[1];
+
+                    usercsv.Add(usr);
+                    i++;
+                }
+                usercsv.Add((user));
+
+                for (int x = 0; x <= i; x++)
+                {
+                    // sw.WriteLine(usercsv.LastIndexOf)
+                }
+            }
         }
 
         public void Add(User user)
@@ -207,7 +233,21 @@ namespace SongsAndVotesCommon.Services
 
         public void Remove(User user)
         {
-
+            using (StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            {
+                //string tempFile = Path.GetTempFileName();
+                string readLine;
+                string delLine = user.Username + ";" + user.Password;
+                sr.ReadLine();
+                while(!sr.EndOfStream)
+                {
+                    readLine = sr.ReadLine();
+                    if(readLine == delLine)
+                    {
+                        //
+                    }
+                }
+            }
         }
     }
 
