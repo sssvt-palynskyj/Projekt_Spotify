@@ -215,7 +215,8 @@ namespace SongsAndVotesCommon.Repos
 
         public void Store(User user)
         {
-            using (StreamWriter sw = new StreamWriter(FilePath, true))
+
+            /*using (StreamWriter sw = new StreamWriter(FilePath, true))
             using (StreamReader sr = new StreamReader(FilePath))
             using (StreamReader sr2 = new StreamReader(FilePath))
             {
@@ -242,7 +243,7 @@ namespace SongsAndVotesCommon.Repos
                 string writeLine = user.Username + ";" + user.Password;
                 sw.WriteLine(writeLine); //usercsv.LastIndexOf 
                 //}
-            }
+            }*/
         }
 
         public void Add(User user)
