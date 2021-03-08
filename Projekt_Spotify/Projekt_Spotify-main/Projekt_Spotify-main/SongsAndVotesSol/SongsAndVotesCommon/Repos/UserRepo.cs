@@ -56,7 +56,7 @@ namespace SongsAndVotesCommon.Repos
 
 
         //string FilePath = (@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-
+        
         public IList<User> GetList(User user)
         {
             string SelectAllUsernames = "Select Username from UserData";
@@ -332,13 +332,5 @@ namespace SongsAndVotesCommon.Repos
             sr.Dispose();
             return x;
         }
-
-        public IList<User> GetList()
-        {
-            throw new NotImplementedException();
-        }
     }
-
-
-
 }
