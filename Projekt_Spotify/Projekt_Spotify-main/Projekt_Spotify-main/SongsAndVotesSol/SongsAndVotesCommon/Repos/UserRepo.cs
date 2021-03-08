@@ -5,6 +5,9 @@ using System.IO;
 using SongsAndVotesCommon.BusinessObjects;
 using SongsAndVotesCommon.Factories;
 using SongsAndVotesCommon.Interfaces;
+using System.Data.SqlClient;
+using System.Data;
+using System.ComponentModel;
 
 namespace SongsAndVotesCommon.Repos
 {
@@ -17,7 +20,30 @@ namespace SongsAndVotesCommon.Repos
     public class UserRepo : IUserRepo
     {
 
+        //-------------------------------------------------------------------------------------------
+        private const string connectionString = "Server=localhost; Database=SongsAndVotesUsers; Integrated Security=true";
+        public SqlConnection ConnectToDatabase()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            return connection;
+        }
 
+        public void TestDatabase()
+        {
+            SqlConnection sqlConnection = ConnectToDatabase();
+            sqlConnection.Open();
+
+            SqlCommand command = new SqlCommand("Select * from UserData", sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+            while(reader.Read())
+            {
+                Console.WriteLine(reader.GetString(0));
+            }
+
+            SqlCommand sqlCommand = new SqlCommand("Insert ...", sqlConnection);
+            ///sql
+        }
+        //-------------------------------------------------------------------------------------------
 
         /// <summary>Database table with user info.</summary>
         private const string RepoFile = @"..\..\..\Resources\Database\User.csv";
@@ -28,164 +54,170 @@ namespace SongsAndVotesCommon.Repos
         /// <summary>Header line in the repo.</summary>
         private const string HeaderLine = "Username;Password";
 
-        public bool UserExists(User user)
-        {
-            bool x = false;
 
-            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-            sr.ReadLine(); //aby se vynechala první lina jinak by šlo použít Username;Password jako login
-            while (!sr.EndOfStream)
-            {
-                string oneLine = sr.ReadLine();
-                string[] splitLineName = oneLine.Split(';');
-                string lineName = splitLineName[0];
-
-                if (lineName == Convert.ToString(user.Username))
-                {
-                    x = true;
-                }
-            }
-            sr.Close();
-            sr.Dispose();
-            return x;
-        }
-
-
-
-        /// <summary>
-        /// Checks with the database whether there is a given user with a given password.
-        /// </summary>
-        /// <param name="user">User to check for.</param>
-        /// <returns>Returns true :-: the given combination of username/password is valid, false :-: the username and/or password are wrong.</returns>
-        public bool CheckUsernameAndPassword(User user)
-        {
-            bool x = false;
-            string daWay = (@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-            StreamReader sr = new StreamReader(daWay);
-            sr.ReadLine();
-
-            while (!sr.EndOfStream)
-            {
-                string line = sr.ReadLine();
-                string[] splitLine = line.Split(';');
-
-                string name = splitLine[0];
-                string pass = splitLine[1];
-
-                if (name == user.Username && pass == user.Password)
-                {
-                    x = true;
-                }
-            }
-            sr.Close();
-            sr.Dispose();
-            return x;
-        }
+        //string FilePath = (@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
 
         public IList<User> GetList(User user)
         {
-            List<User> listOfUsers = new List<User>();
-            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-
-            sr.ReadLine();
-            while (!sr.EndOfStream)
+            string SelectAllUsernames = "Select Username from UserData";
+            using (SqlCommand sqlCommand = new SqlCommand(SelectAllUsernames, ConnectToDatabase()))
             {
-                string line = sr.ReadLine();
-                string[] splitLine = line.Split(';');
-                User usr = new User(splitLine[0], splitLine[1]);
-
-                listOfUsers.Add(usr);
-            }
-            sr.Close();
-            sr.Dispose();
-            return listOfUsers;
-        }
-
-        public IList<User> FindList(User user)
-        {
-            List<User> listOfUsers = new List<User>();
-            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-
-            sr.ReadLine();
-            while (!sr.EndOfStream)
-            {
-                string line = sr.ReadLine();
-                string[] splitLine = line.Split(';');
-                User usr = new User(splitLine[0], null);
-
-                listOfUsers.Add(usr);
-            }
-            sr.Close();
-            sr.Dispose();
-            return listOfUsers;
-        }
-
-        public bool Exists(User user)
-        {
-            bool x = false;
-
-            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-            sr.ReadLine();
-            while (!sr.EndOfStream)
-            {
-                string oneLine = sr.ReadLine();
-                string[] splitLineName = oneLine.Split(';');
-                string lineName = splitLineName[0];
-
-                if (lineName == Convert.ToString(user.Username))
+                IList<User> MatchingUserName = new List<User> { };
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                int i = 0;
+                while(sqlDataReader.Read())
                 {
-                    x = true;
+                    i++;
+                    User MatchingUser = new User(sqlDataReader.GetString(i), null);
+                    MatchingUserName.Add(MatchingUser);
+                    //UserNames.Add(sqlDataReader.GetString(i));
                 }
+                return MatchingUserName;
+                //return (IList<User>)UserNames;
             }
-            sr.Close();
-            sr.Dispose();
-            return x;
-        }
-
-        public User Load(User user)
-        {
-            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
-            sr.ReadLine();
-            User usr = null;
-
-            try
+            
+            /*using (StreamReader sr = new StreamReader(FilePath))
             {
+                List<User> listOfUsers = new List<User>();
+                sr.ReadLine();
+
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
                     string[] splitLine = line.Split(';');
 
-                    if (splitLine[0] == user.Username)
+                    User usr = new User(splitLine[0], splitLine[1]);
+                    listOfUsers.Add(usr);
+                }
+                return listOfUsers;
+            }*/
+        }
+
+        public IList<User> FindList(User user)
+        {
+            string SelectMatchingUser = "Select Username from UserData where Username = " + Convert.ToString(user.Username);
+            using (SqlCommand sqlCommand = new SqlCommand(SelectMatchingUser, ConnectToDatabase()))
+            {
+                    IList<User> MatchingUsers = new List<User> { };
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    int i = 0;
+                    while (sqlDataReader.Read())
                     {
-                        usr = new User(splitLine[0], splitLine[1]);
+                        i++;
+                        User MatchingUser = new User(sqlDataReader.GetString(i), null);
+                        MatchingUsers.Add(MatchingUser);
+                        //UserNames.Add(sqlDataReader.GetString(i));
+                    }
+                    return MatchingUsers;
+                    //return (IList<User>)UserNames;
+                
+                /*
+                using (StreamReader sr = new StreamReader(FilePath))
+                {
+                    List<User> listOfMatchingUsers = new List<User>();
+                    sr.ReadLine();
+
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] splitLine = line.Split(';');
+
+                        User usr = new User(splitLine[0], null);
+                        listOfMatchingUsers.Add(usr);
+                    }
+                    return listOfMatchingUsers;
+                }*/
+            }
+        }
+
+        public bool Exists(User user)
+        {
+            string UserExists = "Select COUNT(Username) from UserData where Username ='" + user.Username +
+                "' and Password ='" + user.Password +"'";
+            using (SqlCommand sqlCommand = new SqlCommand(UserExists, ConnectToDatabase()))
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(UserExists, ConnectToDatabase());
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+
+                if(dataTable.Rows[0][0].ToString() == "1")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            /*using (StreamReader sr = new StreamReader(FilePath))
+            {
+                sr.ReadLine();
+                bool x = false;
+                while (!sr.EndOfStream)
+                {
+                    string oneLine = sr.ReadLine();
+                    string[] splitLine = oneLine.Split(';');
+                    User usr = new User(splitLine[0], null);
+
+                    if (usr.Username == user.Username)
+                    {
+                        x = true;
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            finally
-            {
-                sr.Close();
-                sr.Dispose();
-            }
+                return x;
+            }*/
+        }
 
-            if (usr != null)
+        public User Load(User user)
+        {
+            if(Exists(user) == true)
             {
-                return usr;
+                return (User)FindList(user);
             }
             else
             {
                 throw new NotImplementedException();
             }
+            /*using(StreamReader sr = new StreamReader(FilePath))
+            {
+                sr.ReadLine();
+                User usr = null;
+
+                try
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] splitLine = line.Split(';');
+
+                        if (splitLine[0] == user.Username)
+                        {
+                            usr = new User(splitLine[0], splitLine[1]);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                if (usr != null)
+                {
+                    return usr;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }*/
         }
 
         public void Store(User user)
         {
-            using (StreamWriter sw = new StreamWriter(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv", true))
-            using (StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
-            using (StreamReader sr2 = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            using (StreamWriter sw = new StreamWriter(FilePath, true))
+            using (StreamReader sr = new StreamReader(FilePath))
+            using (StreamReader sr2 = new StreamReader(FilePath))
             {
                 int i = 0;
                 //List<User> usercsv = new List<User>();
@@ -217,13 +249,21 @@ namespace SongsAndVotesCommon.Repos
         {
             if (Exists(user) == false)
             {
-                StreamWriter sw = new StreamWriter(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv", );
             }
         }
 
         public void Remove(User user)
         {
-            using (StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
+            if (Exists(user) == true)
+            {
+                string DeleteUser = "Delete from UserData where Username = '" + user.Username + "'";
+                using (SqlCommand sqlCommand = new SqlCommand(DeleteUser, ConnectToDatabase())) { }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+            /*using (StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv"))
             {
                 //string tempFile = Path.GetTempFileName();
                 string readLine;
@@ -237,7 +277,64 @@ namespace SongsAndVotesCommon.Repos
                         //
                     }
                 }
+            }*/
+        }
+
+        public bool UserExists(User user)
+        {
+            bool x = false;
+
+            StreamReader sr = new StreamReader(@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
+            sr.ReadLine(); //aby se vynechala první lina jinak by šlo použít Username;Password jako login
+            while (!sr.EndOfStream)
+            {
+                string oneLine = sr.ReadLine();
+                string[] splitLineName = oneLine.Split(';');
+                string lineName = splitLineName[0];
+
+                if (lineName == Convert.ToString(user.Username))
+                {
+                    x = true;
+                }
             }
+            sr.Close();
+            sr.Dispose();
+            return x;
+        }
+
+        /// <summary>
+        /// Checks with the database whether there is a given user with a given password.
+        /// </summary>
+        /// <param name="user">User to check for.</param>
+        /// <returns>Returns true :-: the given combination of username/password is valid, false :-: the username and/or password are wrong.</returns>
+        public bool CheckUsernameAndPassword(User user)
+        {
+            bool x = false;
+            string daWay = (@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
+            StreamReader sr = new StreamReader(daWay);
+            sr.ReadLine();
+
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+                string[] splitLine = line.Split(';');
+
+                string name = splitLine[0];
+                string pass = splitLine[1];
+
+                if (name == user.Username && pass == user.Password)
+                {
+                    x = true;
+                }
+            }
+            sr.Close();
+            sr.Dispose();
+            return x;
+        }
+
+        public IList<User> GetList()
+        {
+            throw new NotImplementedException();
         }
     }
 

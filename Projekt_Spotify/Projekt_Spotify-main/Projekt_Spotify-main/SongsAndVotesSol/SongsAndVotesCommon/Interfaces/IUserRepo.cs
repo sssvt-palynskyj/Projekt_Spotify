@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 using SongsAndVotesCommon.BusinessObjects;
-
+using System.Data.SqlClient;
 
 
 namespace SongsAndVotesCommon.Interfaces
@@ -15,7 +15,7 @@ namespace SongsAndVotesCommon.Interfaces
     /// </summary>
     public interface IUserRepo
     {
-
+        SqlConnection ConnectToDatabase();
 
 
         /// <summary>
@@ -25,8 +25,6 @@ namespace SongsAndVotesCommon.Interfaces
         IList<User> GetList();
         //done
 
-
-
         /// <summary>
         /// Finds all users matching given criteria (just the username at the moment).
         /// </summary>
@@ -34,7 +32,6 @@ namespace SongsAndVotesCommon.Interfaces
         /// <returns>Returns a list of matching users.</returns>
         IList<User> FindList(User user);
         //done
-
 
         /// <summary>
         /// Checks the repo for a given user (their username).
@@ -44,8 +41,6 @@ namespace SongsAndVotesCommon.Interfaces
         bool Exists(User user);
         //done
 
-
-
         /// <summary>
         /// Tries to load data about a given user (according to the username) and returns the information loaded.
         /// </summary>
@@ -54,14 +49,11 @@ namespace SongsAndVotesCommon.Interfaces
         User Load(User user);
         //done
 
-
         /// <summary>
         /// Tries to store (persist) data about a given user.
         /// </summary>
         /// <param name="user">User to be persisted in the repo.</param>
         void Store(User user);
-
-
 
         /// <summary>
         /// Adds a new user to the repo.
@@ -69,18 +61,11 @@ namespace SongsAndVotesCommon.Interfaces
         /// <param name="user">User to add.</param>
         void Add(User user);
 
-
-
         /// <summary>
         /// Removes a given user from the repo.
         /// </summary>
         /// <param name="user">User to remove.</param>
         void Remove(User user);
-
-
-
+        //done
     }
-
-
-
 }

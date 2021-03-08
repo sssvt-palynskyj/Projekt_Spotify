@@ -16,8 +16,6 @@ namespace SongsAndVotesCommon.Factories
     public class UserRepoFactory
     {
 
-
-
         /// <summary>
         /// Gets an object implementing the user repo.
         /// </summary>
@@ -27,10 +25,5 @@ namespace SongsAndVotesCommon.Factories
             return new UserRepo();
         }
 
-
-
     }
-
-
-
 }
