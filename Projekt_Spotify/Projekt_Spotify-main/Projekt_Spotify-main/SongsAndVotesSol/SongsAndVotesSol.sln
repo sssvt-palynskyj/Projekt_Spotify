@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Songs", "Songs", "{24627905
 		Resources\Songs\Yshwa_-_07_-_Battle_Rappers.mp3 = Resources\Songs\Yshwa_-_07_-_Battle_Rappers.mp3
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongsAndVotesAdmin", "SongsAndVotesAdmin\SongsAndVotesAdmin.csproj", "{BB602232-048A-45B9-9A25-8605A3D03B33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B143A39-C7B2-4743-9917-92262C60E9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB602232-048A-45B9-9A25-8605A3D03B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB602232-048A-45B9-9A25-8605A3D03B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB602232-048A-45B9-9A25-8605A3D03B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB602232-048A-45B9-9A25-8605A3D03B33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

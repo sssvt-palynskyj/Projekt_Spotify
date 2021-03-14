@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SongsAndVotesCommon.Formular
 {
-    public partial class SongsAndVotesAdmin : Form
+    public partial class LoginForm : Form
     {
-        public SongsAndVotesAdmin()
+        public LoginForm()
         {
             InitializeComponent();
 
@@ -21,6 +21,16 @@ namespace SongsAndVotesCommon.Formular
             string loginPassword = textBox2.Text;
 
 
+
+        }
+
+        private void SongsAndVotesLoginForm(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

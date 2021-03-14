@@ -57,7 +57,7 @@ namespace SongsAndVotesCommon.Repos
 
         //string FilePath = (@"E:\GitHub\local\Projekt\Projekt_Spotify\Projekt_Spotify-main\Projekt_Spotify-main\SongsAndVotesSol\Resources\Database\User.csv");
         
-        public IList<User> GetList(User user)
+        public IList<User> GetList()
         {
             string SelectAllUsernames = "Select Username from UserData";
             using (SqlCommand sqlCommand = new SqlCommand(SelectAllUsernames, ConnectToDatabase()))
